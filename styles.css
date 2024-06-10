@@ -1,0 +1,300 @@
+/* Logo */
+#logo {
+    width: 140px;
+    height: 110px;
+    margin-top: 0; /* Align with the top */
+    margin-bottom: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Top color section */
+.top-color {
+    background-image: url(backgroundlight.png);
+    background-repeat: no-repeat;
+    height: 300px;
+    background-size: cover;
+}
+
+/* Footer */
+footer {
+    background-color: rgb(253, 170, 184);
+    padding: 20px;
+    text-align: center;
+    font-size: 30px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap */
+    align-items: center; /* Center vertically */
+    justify-content: space-between; /* Distribute items evenly */
+    padding: 0px;
+    margin-bottom: 0px;
+    margin-top: 0px; /* Adjust margin as needed */
+    width: 100%;
+    height: 90px;
+}
+
+footer a {
+    color: black;
+    text-decoration: underline;
+}
+
+/* Navbar */
+.navbar {
+    background-color: rgb(253, 170, 184); /* Pink background color */
+}
+
+.navbar-brand {
+    color: black; /* Text color for the brand */
+    font-size: 24px; /* Font size for the brand */
+}
+
+.navbar-toggler {
+    border-color: black !important; /* Border color for the toggler button */
+    background-color: black !important; /* Background color for better visibility */
+}
+
+.navbar-toggler-icon {
+    color: black !important;
+}
+
+/* Navbar links color */
+.navbar-nav .nav-link {
+    color: black; /* Text color */
+}
+
+/* Cart badge styles */
+#cart-item {
+    background-color: red; /* Background color */
+    color: black; /* Text color */
+}
+
+/* Data toggle and target */
+.data-toggle {
+    color: black !important;
+}
+
+.data-target {
+    color: black !important;
+}
+
+#collapsibleNavbar {
+    color: black !important;
+}
+
+/* Unordered list styles */
+ul {
+    list-style: none;
+    display: flex;
+    align-items: center; /* Center vertically */
+    margin: 0;
+    margin-top: 0px;
+    padding: 0px;
+    margin: 0 auto;
+    background-color: rgb(253, 170, 184); /* Pink background color */
+    justify-content: space-between;
+    width: 60%;
+    padding-top: 0px;
+}
+
+ul li {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    margin-left: 10px;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    padding-top: 0px;
+    width: 100%;
+    background-color: rgb(253, 170, 184); /* Pink background color */
+}
+
+ul li a {
+    font-size: 20px;
+    color: black;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* Amour florist section */
+.A {
+    text-align: center;
+    padding: 0px;
+    color: white; /* White text color */
+    font-size: 38px; /* Font size */
+    font-style: italic;
+    font-family: 'Segoe Script', cursive, sans-serif;
+}
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"poppins",sans-serif;
+}
+body{
+    background-color: #c9d6ff;
+    background:linear-gradient(to right,#e2e2e2,#c9d6ff);
+}
+.container{
+    background:#fff;
+    width:450px;
+    padding:1.5rem;
+    margin:50px auto;
+    border-radius:10px;
+    box-shadow:0 20px 35px rgba(0,0,1,0.9);
+}
+form{
+    margin:0 2rem;
+}
+.form-title{
+    font-size:1.5rem;
+    font-weight:bold;
+    text-align:center;
+    padding:1.3rem;
+    margin-bottom:0.4rem;
+}
+input{
+    color:inherit;
+    width:100%;
+    background-color:transparent;
+    border:none;
+    border-bottom:1px solid #757575;
+    padding-left:1.5rem;
+    font-size:15px;
+}
+.input-group{
+    padding:1% 0;
+    position:relative;
+
+}
+.input-group i{
+    position:absolute;
+    color:black;
+}
+input:focus{
+    background-color: transparent;
+    outline:transparent;
+    border-bottom:2px solid hsl(327,90%,28%);
+}
+input::placeholder{
+    color:transparent;
+}
+label{
+    color:#757575;
+    position:relative;
+    left:1.2em;
+    top:-1.3em;
+    cursor:auto;
+    transition:0.3s ease all;
+}
+
+.recover{
+    text-align:right;
+    font-size:1rem;
+    margin-bottom:1rem;
+
+}
+.recover a{
+    text-decoration:none;
+    color:rgb(125,125,235);
+}
+.recover a:hover{
+    color:blue;
+    text-decoration:underline;
+}
+.btn{
+    font-size:1.1rem;
+    padding:8px 0;
+    border-radius:5px;
+    outline:none;
+    border:none;
+    width:100%;
+    background:rgb(125,125,235);
+    color:white;
+    cursor:pointer;
+    transition:0.9s;
+}
+.btn:hover{
+    background:#07001f;
+}
+.or{
+    font-size:1.1rem;
+    margin-top:0.5rem;
+    text-align:center;
+}
+.icons{
+    text-align:center;
+}
+.icons i{
+    color:rgb(125,125,235);
+    padding:0.8rem 1.5rem;
+    border-radius:10px;
+    font-size:1.5rem;
+    cursor:pointer;
+    border:2px solid #dfe9f5;
+    margin:0 15px;
+    transition:1s;
+}
+.icons i:hover{
+    background:#07001f;
+    font-size:1.6rem;
+    border:2px solid rgb(125,125,235);
+}
+.links{
+    display:flex;
+    justify-content:space-around;
+    padding:0 4rem;
+    margin-top:0.9rem;
+    font-weight:bold;
+}
+button{
+    color:rgb(125,125,235);
+    border:none;
+    background-color:transparent;
+    font-size:1rem;
+    font-weight:bold;
+}
+button:hover{
+    text-decoration:underline;
+    color:blue;
+}
+.login-container {
+    width: 300px;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .btn-primary {
+    width: 100%;
+  }
+
+  .navbar {
+position: absolute;
+top: 0;
+width: 100%;
+z-index: 1000;
+
+  }
+
+  .navbar-brand, .nav-link {
+    color: black !important; /* White text */
+  }
+  .B {
+  text-align: left;
+ 
+ 
+  font-size: 20px;
+
+}
+
+
