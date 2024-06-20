@@ -12,7 +12,7 @@ require 'config.php'; // Include your database connection file
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Shopping Cart System</title>
-  <link rel="stylesheet" href="style.css"> <!-- Link to custom CSS file -->
+  <link rel="stylesheet" href="style.css"> <!-- Link to CSS file -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css"> <!-- Link to Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"> <!-- Link to Font Awesome for icons -->
 </head>
