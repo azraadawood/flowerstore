@@ -1,39 +1,41 @@
 <?php
-//Php code
+// Include configuration and sidebar file
 include '../config.php';
 include 'sidebar.php';
 ?>
-<!DOCTYPE html> 
-<!-- Html code -->
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="admin_style.css"> <!-- CSS code -->
-
+    <link rel="stylesheet" href="admin_style.css"> <!-- Link to CSS stylesheet -->
 </head>
 <body>
 
 <div class="content">
     <h2>Dashboard</h2>
     <h2>Orders</h2>
-    <?php //php code
+
+    <?php
+    // PHP code to retrieve orders from database
     $result = $conn->query("SELECT * FROM orders");
 
-   
+    // Check if query was successful
     if ($result) {
-        $orders = $result->fetch_all(MYSQLI_ASSOC);
+        $orders = $result->fetch_all(MYSQLI_ASSOC); // Fetch all orders as associative array
     } else {
-        $orders = [];
+        $orders = []; // Initialize empty array if no orders found
     }
 
-    // Error check
+    // Error handling
     if ($conn->error) {
-        echo "Error: " . $conn->error;
-        $orders = [];
+        echo "Error: " . $conn->error; // Display error message if query fails
+        $orders = []; // Set orders to empty array
     }
 
+    // Display orders if not empty
     if (!empty($orders)): ?>
         <table>
             <thead>
@@ -43,7 +45,7 @@ include 'sidebar.php';
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Address</th>
-                    <th>Pmode</th>
+                    <th>Payment Mode</th>
                     <th>Products</th>
                     <th>Edit</th>
                     <th>Delete</th>
@@ -67,8 +69,8 @@ include 'sidebar.php';
         </table>
     <?php else: ?>
         <p>No orders found.</p>
-    <?php endif; ?> 
+    <?php endif; ?>
 </div>
 
-</body> <!-- Html code -->
+</body>
 </html>
