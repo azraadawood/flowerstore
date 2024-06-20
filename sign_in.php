@@ -4,7 +4,7 @@ include("config.php"); // Include the configuration file for database connection
 
 // Check if the sign-in form has been submitted
 if(isset($_POST['signIn'])){
-    // Retrieve and sanitize form inputs
+    // Get input
     $email = $_POST['email'];
     $password = $_POST['password'];
     
