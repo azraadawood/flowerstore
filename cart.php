@@ -1,6 +1,6 @@
 <?php
-  session_start();
-  require 'config.php';
+session_start();
+require 'config.php'; // Include your database connection
 ?>
 
 <!DOCTYPE html>
@@ -13,8 +13,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Shopping Cart System</title>
   <link rel="stylesheet" href="style.css">
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css' />
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css' />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
 </head>
 
 <body>
@@ -29,8 +29,7 @@
       </div>
     </div>
   </header>
-  
- 
+
   <nav class="navbar navbar-expand-md">
     <a class="navbar-brand" href="index.php"> <i class="fas fa-seedling"></i> Amour Florist</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -64,29 +63,26 @@
     </div>
   </nav>
 
-
-
-   
-
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-10">
         <div style="display:<?php if (isset($_SESSION['showAlert'])) {
-          echo $_SESSION['showAlert'];
-        } else {
-          echo 'none';
-        } unset($_SESSION['showAlert']); ?>" class="alert alert-success alert-dismissible mt-3">
+                                echo $_SESSION['showAlert'];
+                              } else {
+                                echo 'none';
+                              }
+                              unset($_SESSION['showAlert']); ?>" class="alert alert-success alert-dismissible mt-3">
           <button type="button" class="close" data-dismiss="alert">&times;</button>
           <strong><?php if (isset($_SESSION['message'])) {
-            echo $_SESSION['message'];
-          } unset($_SESSION['message']); ?></strong>
+                      echo $_SESSION['message'];
+                    }
+                    unset($_SESSION['message']); ?></strong>
         </div>
         <div class="table-responsive mt-3">
           <table class="table table-bordered table-striped text-center">
             <thead>
               <tr>
                 <td colspan="7">
-                  
                   <h4 class="text-center text-info m-1">Products in your cart!</h4>
                 </td>
               </tr>
@@ -104,36 +100,33 @@
             </thead>
             <tbody>
               <?php
-                $stmt = $conn->prepare('SELECT * FROM cart');
-                $stmt->execute();
-                $result = $stmt->get_result();
-                $grand_total = 0;
-                while ($row = $result->fetch_assoc()):
-              ?> <div class="Product">
+              $stmt = $conn->prepare('SELECT * FROM cart');
+              $stmt->execute();
+              $result = $stmt->get_result();
+              $grand_total = 0;
+              while ($row = $result->fetch_assoc()) :
+              ?>
+                <tr>
+                  <td><?= $row['id'] ?></td>
+                  <td><img src="image/<?= $row['product_image'] ?>" width="50"></td>
+                  <td><?= $row['product_name'] ?></td>
+                  <td>&#82;&nbsp;&nbsp;<?= number_format($row['product_price'], 2); ?></td>
+                  <td><?= $row['qty'] ?></td>
+                  <td>&#82;&nbsp;&nbsp;<?= number_format($row['total_price'], 2); ?></td>
+                  <td>
+                    <a href="action.php?remove=<?= $row['id'] ?>" class="text-danger lead" onclick="return confirm('Are you sure want to remove this item?');">Delete</i></a>
+                  </td>
+                </tr>
+                <?php $grand_total += $row['total_price']; ?>
+              <?php endwhile; ?>
               <tr>
-                               
-                                <td><?= $row['id'] ?></td>
-                                <td><img src="image/<?= $row['product_image'] ?>" width="50"></td>
-                                <td><?= $row['product_name'] ?></td>
-                                <td><i class="fas fa-rand-sign"></i>&#82;&nbsp;&nbsp;<?= number_format($row['product_price'],2); ?></td>
-                                <td><?= $row['qty'] ?></td> 
-                                <td><i class="&#82"></i>&#82;&nbsp;&nbsp;<?= number_format($row['total_price'],2); ?></td>
-                                <td>
-                                    <a href="action.php?remove=<?= $row['id'] ?>" class="text-danger lead" onclick="return confirm('Are you sure want to remove this item?');">Delete</i></a>
-                                </td>
-                            </tr>
-                            <?php $grand_total += $row['total_price']; ?>
-                            <?php endwhile; ?>
-                            <tr>
-                            </div>
                 <td colspan="3">
-                  <a href="index.php" class="btn btn-success"><i class="fas fa-cart-plus"></i>Continue
-                    Shopping</a>
+                  <a href="index.php" class="btn btn-success"><i class="fas fa-cart-plus"></i>Continue Shopping</a>
                 </td>
                 <td colspan="2"><b>Grand Total</b></td>
-                <td><b>&#82;&nbsp;&nbsp;<?= number_format($grand_total,2); ?></b></td>
+                <td><b>&#82;&nbsp;&nbsp;<?= number_format($grand_total, 2); ?></b></td>
                 <td>
-                  <a href="sign_in.php" class="btn btn-info <?= ($grand_total > 1) ? '' : 'disabled'; ?>"><i class="far fa-credit-card"></i>Checkout</a>
+                  <a href="sign_in.php" class="btn btn-info <?= ($grand_total > 0) ? '' : 'disabled'; ?>"><i class="far fa-credit-card"></i>Checkout</a>
                 </td>
               </tr>
             </tbody>
@@ -143,18 +136,16 @@
     </div>
   </div>
 
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js'></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="script.js"></script>
-  
-<footer>
-    <h10>  ©2024 | Amour-florist| All Rights Reserved </h10>
-    
-            <a href="privacy.php" >Privacy</a>
-            <a href="termsandconditions.php">Terms and Conditions</a>
-            </footer>
 
-            <?php include 'config.php'; ?>
+  <footer>
+    <p>© 2024 | Amour-florist | All Rights Reserved</p>
+    <a href="privacy.php">Privacy</a>
+    <a href="termsandconditions.php">Terms and Conditions</a>
+  </footer>
+
 </body>
+
 </html>
