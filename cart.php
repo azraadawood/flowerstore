@@ -1,6 +1,6 @@
 <?php
-session_start();
-require 'config.php'; // Include your database connection
+session_start(); //  PHP code
+require 'config.php'; // Include your database connection file
 ?>
 
 <!DOCTYPE html>
@@ -12,9 +12,9 @@ require 'config.php'; // Include your database connection
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Shopping Cart System</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css"> <!-- Link to custom CSS file -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css"> <!-- Link to Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"> <!-- Link to Font Awesome for icons -->
 </head>
 
 <body>
@@ -66,6 +66,7 @@ require 'config.php'; // Include your database connection
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-10">
+        <!-- Display success or alert message based on session data -->
         <div style="display:<?php if (isset($_SESSION['showAlert'])) {
                                 echo $_SESSION['showAlert'];
                               } else {
@@ -87,6 +88,7 @@ require 'config.php'; // Include your database connection
                 </td>
               </tr>
               <tr>
+                <!-- Table headers for cart items -->
                 <th>ID</th>
                 <th>Image</th>
                 <th>Product</th>
@@ -100,6 +102,7 @@ require 'config.php'; // Include your database connection
             </thead>
             <tbody>
               <?php
+              // Fetch cart items from database
               $stmt = $conn->prepare('SELECT * FROM cart');
               $stmt->execute();
               $result = $stmt->get_result();
@@ -107,6 +110,7 @@ require 'config.php'; // Include your database connection
               while ($row = $result->fetch_assoc()) :
               ?>
                 <tr>
+                  <!-- Display each cart item with ID, image, name, price, quantity, total price, and delete option -->
                   <td><?= $row['id'] ?></td>
                   <td><img src="image/<?= $row['product_image'] ?>" width="50"></td>
                   <td><?= $row['product_name'] ?></td>
@@ -120,6 +124,7 @@ require 'config.php'; // Include your database connection
                 <?php $grand_total += $row['total_price']; ?>
               <?php endwhile; ?>
               <tr>
+                <!-- Table row for continue shopping, grand total, and checkout -->
                 <td colspan="3">
                   <a href="index.php" class="btn btn-success"><i class="fas fa-cart-plus"></i>Continue Shopping</a>
                 </td>
@@ -141,6 +146,7 @@ require 'config.php'; // Include your database connection
   <script src="script.js"></script>
 
   <footer>
+    <!-- Footer  -->
     <p>© 2024 | Amour-florist | All Rights Reserved</p>
     <a href="privacy.php">Privacy</a>
     <a href="termsandconditions.php">Terms and Conditions</a>
