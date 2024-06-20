@@ -1,9 +1,9 @@
-<?php
+<?php //php code
 include '../config.php'; // Include your database connection file
 include 'sidebar.php'; // Include sidebar.php for admin panel layout
 
 error_reporting(E_ALL); // Enable error reporting for debugging
-ini_set('display_errors', 1); // Display errors on screen
+ini_set('display_errors', 1); // Display errors 
 
 $errorMsg = ""; // Initialize error message variable
 $successMsg = ""; // Initialize success message variable
@@ -27,13 +27,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // Check if form is submitted via PO
     }
 }
 ?>
-<!DOCTYPE html>
+<!DOCTYPE html> <!-- HTML CODE -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add User</title>
-    <link rel="stylesheet" href="admin_style.css"> <!-- Link to custom CSS file -->
+    <link rel="stylesheet" href="admin_style.css"> <!-- Link to CSS file -->
 </head>
 <body>
 
