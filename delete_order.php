@@ -3,7 +3,7 @@
 include '../config.php';
 include 'sidebar.php';
 
-// Check if order ID is provided in the URL
+// Check if order ID is provided 
 if (isset($_GET['id'])) {
     $order_id = $_GET['id'];
 
