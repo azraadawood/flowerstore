@@ -1,11 +1,11 @@
 <?php
-require 'config.php'; // Include your database connection and other necessary files
+require 'config.php'; // Include your database connection 
 
 session_start();
 
-// Redirect to sign-in page if user is not logged in
+// Go to sign-in page if user is not logged in
 if (!isset($_SESSION['email'])) {
-    header("Location: sign_in.php");
+    header("Location: sign_in.php"); // Redirect to sign-in page
     exit();
 }
 
@@ -24,7 +24,7 @@ while ($row = $result->fetch_assoc()) {
     $grand_total += $row['total_price'];
     $items[] = $row['ItemQty'];
 }
-$allItems = implode(', ', $items);
+$allItems = implode(', ', $items); // Create a comma-separated list of items
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +33,7 @@ $allItems = implode(', ', $items);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amour Florist</title>
-    <link rel="stylesheet" href="style.css"> <!-- Include your custom CSS file -->
+    <link rel="stylesheet" href="style.css"> <!-- Link to your custom CSS file -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
 </head>
@@ -143,6 +143,7 @@ $allItems = implode(', ', $items);
 
 <script type="text/javascript">
 $(document).ready(function() {
+    // Handle form submission using Ajax
     $("#placeOrder").submit(function(e) {
         e.preventDefault();
         $.ajax({
@@ -150,10 +151,12 @@ $(document).ready(function() {
             method: 'post',
             data: $('form').serialize() + "&action=order",
             success: function(response) {
-                $("#order").html(response);
+                $("#order").html(response); // Replace form with response (e.g., success message)
             }
         });
     });
+    
+    // Function to load and update cart item count
     load_cart_item_number();
 
     function load_cart_item_number() {
@@ -164,7 +167,7 @@ $(document).ready(function() {
                 cartItem: "cart_item"
             },
             success: function(response) {
-                $("#cart-item").html(response);
+                $("#cart-item").html(response); // Update cart item count
             }
         });
     }
