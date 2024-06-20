@@ -1,59 +1,54 @@
-<?php //PHP code
-include '../config.php';
-include 'sidebar.php';
+<?php
+include '../config.php'; // Include your database connection file
+include 'sidebar.php'; // Include sidebar.php for admin panel layout
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+error_reporting(E_ALL); // Enable error reporting for debugging
+ini_set('display_errors', 1); // Display errors on screen
 
-$errorMsg = "";
-$successMsg = "";
+$errorMsg = ""; // Initialize error message variable
+$successMsg = ""; // Initialize success message variable
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-   
+if ($_SERVER["REQUEST_METHOD"] == "POST") { // Check if form is submitted via POST method
+
+    // Retrieve form data
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    
+    // Prepare SQL statement to insert data into database
     $stmt = $conn->prepare("INSERT INTO users (firstName, lastName, email, password) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $firstName, $lastName, $email, $password);
+    $stmt->bind_param("ssss", $firstName, $lastName, $email, $password); // Bind parameters for security
 
-    if ($stmt->execute()) {
-        $successMsg = "User was successfully added.";
+    if ($stmt->execute()) { // Execute SQL statement
+        $successMsg = "User was successfully added."; // Set success message if insertion is successful
     } else {
-        $errorMsg = "Error  " . $conn->error;
+        $errorMsg = "Error: " . $conn->error; // Set error message if insertion fails
     }
 }
 ?>
-<!-- HTML code -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add User</title>
-    <link rel="stylesheet" href="admin_style.css"> <!-- CSS code link -->
-    
-    
+    <link rel="stylesheet" href="admin_style.css"> <!-- Link to custom CSS file -->
 </head>
 <body>
 
 <div class="content">
     <h2>Add user</h2>
 
-    <?php // PHP code
-    
+    <?php // PHP code to display success or error messages
     if (!empty($errorMsg)) {
-        echo "<div class='error'>$errorMsg</div>";
+        echo "<div class='error'>$errorMsg</div>"; // Display error message if not empty
     }
 
     if (!empty($successMsg)) {
-        echo "<div class='success'>$successMsg</div>";
+        echo "<div class='success'>$successMsg</div>"; // Display success message if not empty
     }
     ?>
-<!-- HTML code -->
 
     <form method="post">
         <label for="firstName">First Name:</label>
@@ -68,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
 
-        <input type="submit" value="Add new user">
+        <input type="submit" value="Add new user"> <!-- Submit button for form -->
     </form>
 </div>
 
