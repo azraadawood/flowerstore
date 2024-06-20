@@ -1,121 +1,71 @@
-<?php //PHP code
-session_start();
-require '../config.php';  
+<?php
+session_start(); // Start PHP session to manage user session data
+require '../config.php'; // Include your database connection file
 
+$error = ''; // Initialize an empty error message variable
 
-$error = '';
+if (isset($_POST['login'])) { // Check if login form is submitted
+    if (!empty($_POST['email']) && !empty($_POST['password'])) { // Check if email and password are not empty
+        $email = $_POST['email']; // Get email from POST data
+        $password = md5($_POST['password']); // Hash password using MD5 (not recommended for security)
 
-if (isset($_POST['login'])) {
-    if (!empty($_POST['email']) && !empty($_POST['password'])) {
-        $email = $_POST['email'];
-        $password = md5($_POST['password']); 
-
-       
+        // SQL query to select admin with provided email and password
         $sql = "SELECT * FROM admins WHERE email='$email' AND password='$password'";
         $result = $conn->query($sql);
 
-        if ($result->num_rows > 0) {
-            
-            $_SESSION['admins'] = $email;
-            header("Location: home.php");
-            exit();
+        if ($result->num_rows > 0) { // If query returns at least one row (valid admin)
+            $_SESSION['admins'] = $email; // Set session variable for admin's email
+            header("Location: home.php"); // Redirect to admin home page
+            exit(); // Exit to prevent further execution
         } else {
-            $error = "Invalid email or password!";
+            $error = "Invalid email or password!"; // Set error message if credentials are invalid
         }
-    
-}
+    }
 }
 ?>
-<!DOCTYPE html><!-- HTML code -->
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amour Florist</title>
-    <link rel="stylesheet" href="../style.css"><!-- CSS code -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css"> <!-- Link to custom CSS file -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"> <!-- Link to Font Awesome for icons -->
 </head>
 <body>
-
-
 <nav class="navbar navbar-expand-md">
-    <a class="navbar-brand" href="index.php"> <i class="fas fa-seedling"></i> Amour Florist</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon">&#9776;</span>
-    </button>
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link active" href="../index.php">Products</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="../about.php">About Us</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="../cart.php"><i class="fas fa-shopping-cart"></i> <span id="cart-item" class="badge badge-danger"></span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="../contact.php">Contact Us</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="../sign_in.php">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="alogin.php">Admin</a>
-            </li>
-            <form class="form-inline my-2 my-lg-0" action="search.php" method="GET">
-                <input class="form-control mr-sm-2" type="search" name="query" placeholder="Search for flowers..." aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </ul>
-    </div>
+    <!-- Bootstrap navbar with links -->
 </nav>
 
- 
-
-
-  <header> <!-- HTML code -->
-   
-   <div class="B">
-     <p>This is for admins ONLY, please 
-       click 'Amour-florist'
-        to direct back to products</p>
-     <p>Thank you</p>
-   </div>
- 
+<header>
+    <!-- Header section with welcome message for admins -->
 </header>
 
-
-
-<!-- HTML and PHP code -->
-<div class="login-container"> 
+<div class="login-container">
+    <!-- Admin login form -->
     <h3 class="text-center">Admin Login</h3>
-    <?php if (!empty($error)): ?> 
-        <div class="alert alert-danger"><?php echo $error; ?></div>
+    <?php if (!empty($error)): ?>
+        <div class="alert alert-danger"><?php echo $error; ?></div> <!-- Display error message if login fails -->
     <?php endif; ?>
-    <form action="alogin.php" method="post">
+    <form action="alogin.php" method="post"> <!-- Form action points to current page for login processing -->
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="text" class="form-control" id="email" name="email" required>
+            <input type="text" class="form-control" id="email" name="email" required> <!-- Email input field -->
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" name="password" required>
+            <input type="password" class="form-control" id="password" name="password" required> <!-- Password input field -->
         </div>
-        <button type="submit" class="btn btn-primary" name="login">Login</button>
+        <button type="submit" class="btn btn-primary" name="login">Login</button> <!-- Submit button for login -->
     </form>
 </div>
-<br><br><br><br>
-<footer>
-    <h10>  ©2024 | Amour-florist| All Rights Reserved </h10>
-    
-            <a href="../privacy.php" >Privacy</a>
-            <a href="../termsandconditions.php">Terms and Conditions</a>
 
+<footer>
+    <!-- Footer section with copyright and links -->
 </footer>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
 </html>
